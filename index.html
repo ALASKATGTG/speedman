@@ -101,6 +101,7 @@ body::before {
     margin-top: -65px;
     position: relative;
     z-index: 3;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -209,40 +210,66 @@ body::before {
     box-shadow: 0 8px 30px rgba(255,72,18,.5);
 }
 
-<!-- АЛЬБОМ -->
-<div class="album">
+/* АЛЬБОМ */
 
-    <div class="album-title">
-        MY ALBUM
-    </div>
+.album {
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 20px;
 
-    <div class="album-grid">
-        <div class="album-photo">
-            <img src="photo1.jpg" alt="Photo 1">
-        </div>
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.10);
 
-        <div class="album-photo">
-            <img src="photo2.jpg" alt="Photo 2">
-        </div>
+    box-shadow: 0 10px 35px rgba(0,0,0,.2);
+}
 
-        <div class="album-photo">
-            <img src="photo3.jpg" alt="Photo 3">
-        </div>
+.album-title {
+    text-align: center;
+    font-size: 17px;
 
-        <div class="album-photo">
-            <img src="photo4.jpg" alt="Photo 4">
-        </div>
 
-        <div class="album-photo">
-            <img src="photo5.jpg" alt="Photo 5">
-        </div>
+font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
 
-        <div class="album-photo">
-            <img src="photo6.jpg" alt="Photo 6">
-        </div>
-    </div>
+    color: #ffad70;
+    text-shadow: 0 0 15px rgba(255,112,34,.4);
+}
 
-</div>
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.album-photo {
+    height: 190px;
+    overflow: hidden;
+    border-radius: 13px;
+
+    border: 1px solid rgba(255,255,255,.13);
+    background: rgba(0,0,0,.3);
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.2);
+    transition: .3s;
+}
+
+.album-photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform .4s ease;
+}
+
+.album-photo:hover img {
+    transform: scale(1.07);
+}
+
+.album-photo:hover {
+    border-color: rgba(255,120,40,.7);
+    box-shadow: 0 5px 25px rgba(255,85,20,.2);
+}
 
 /* МУЗЫКА */
 
@@ -292,6 +319,8 @@ body::before {
     color: rgba(255,255,255,.35);
 }
 
+/* МОБИЛЬНАЯ ВЕРСИЯ */
+
 max-width: 500px {
     .container {
         padding: 25px 15px 45px;
@@ -302,7 +331,11 @@ max-width: 500px {
     }
 
     .album-photo {
-        height: 210px;
+        height: 160px;
+    }
+
+    .album {
+        padding: 15px;
     }
 
     .name {
@@ -325,7 +358,7 @@ max-width: 500px {
     <div class="profile">
 
         <div class="avatar">
-            <img src="avatar.gif" alt="Avatar">
+            <img src="avatar.jpg" alt="Avatar">
         </div>
 
         <div class="name">SpeedMan</div>
@@ -357,10 +390,33 @@ max-width: 500px {
             МОМЕНТЫ
         </div>
 
-        <div class="album-photo">
-            <img src="photo.jpg" alt="My photo">
-        </div>
+        <div class="album-grid">
 
+            <div class="album-photo">
+                <img src="photo1.jpg" alt="Photo 1">
+            </div>
+
+            <div class="album-photo">
+                <img src="photo2.jpg" alt="Photo 2">
+            </div>
+
+            <div class="album-photo">
+                <img src="photo3.jpg" alt="Photo 3">
+            </div>
+
+            <div class="album-photo">
+                <img src="photo4.jpg" alt="Photo 4">
+            </div>
+
+            <div class="album-photo">
+                <img src="photo5.jpg" alt="Photo 5">
+            </div>
+
+            <div class="album-photo">
+                <img src="photo6.jpg" alt="Photo 6">
+            </div>
+
+        </div>
     </div>
 
     <div class="footer">
@@ -395,7 +451,13 @@ function createSnowflake() {
 
     setTimeout(() => {
         snow.remove();
-    }, 12000);
+    },
+Telegram – a new era of messaging
+Telegram – a new era of messaging
+telegram.org
+
+
+12000);
 }
 
 setInterval(createSnowflake, 250);
