@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#e65b19">
+
+<title>SpeedMan</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --orange: #ff741f;
+    --red: #e52b16;
+    --dark: #160c09;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(ellipse at 20% 20%, #a93412 0%, transparent 45%),
+        radial-gradient(ellipse at 80% 40%, #ff7b22 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 90%, #8d1b0d 0%, transparent 55%),
+        #160c09;
+
+    background-size: 200% 200%;
+    animation: backgroundMove 12s ease infinite;
+}
+
+@keyframes backgroundMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+
+    background: linear-gradient(
+        125deg,
+        transparent 20%,
+        rgba(255, 112, 34, .12),
+        transparent 70%
+    );
+
+    animation: shine 7s linear infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* ОСНОВНОЙ КОНТЕЙНЕР */
+
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 620px;
+    margin: auto;
+    padding: 35px 20px 60px;
+}
+
+/* БАННЕР */
+
+.banner {
+    width: 100%;
+    height: 190px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+
+    border: 1px solid rgba(255,255,255,.15);
+    box-shadow: 0 10px 45px rgba(255,75,15,.25);
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ПРОФИЛЬ */
+
+.profile {
+    text-align: center;
+    margin-top: -65px;
+    position: relative;
+    z-index: 3;
+}
+
+.avatar {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    padding: 4px;
+
+    background: linear-gradient(
+        135deg,
+        #ffb347,
+        #ff3c17,
+        #ff8c28,
+        #ffb347
+    );
+
+    background-size: 300% 300%;
+    animation: avatarGlow 5s ease infinite;
+
+    box-shadow: 0 0 35px rgba(255,91,24,.5);
+}
+
+@keyframes avatarGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.name {
+    margin-top: 18px;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 2px;
+
+    background: linear-gradient(
+        90deg,
+        #fff,
+        #ffb36b,
+        #ff5b22,
+        #fff
+    );
+
+    background-size: 250%;
+    color: transparent;
+    background-clip: text;
+    animation: textGlow 5s linear infinite;
+}
+
+@keyframes textGlow {
+    to { background-position: 250% center; }
+}
+
+.username {
+    color: rgba(255,255,255,.55);
+    margin-top: 7px;
+    font-size: 14px;
+}
+
+/* ОПИСАНИЕ */
+
+.description {
+    margin: 25px auto;
+    max-width: 420px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,.8);
+}
+
+/* КНОПКИ */
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.button {
+    padding: 13px 27px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+
+    background: linear-gradient(135deg,#ff7927,#e63219);
+    box-shadow: 0 5px 25px rgba(255,72,18,.25);
+
+    transition: .3s;
+}
+
+.button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(255,72,18,.5);
+}
+
+/* АЛЬБОМ */
+
+.album {
+    margin-top: 55px;
+}
+
+.album-title {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: #ffb078;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.album-photo {
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    border-radius: 18px;
+
+    border: 1px solid rgba(255,255,255,.15);
+    box-shadow: 0 10px 35px
+
+
+rgba(0,0,0,.35);
+}
+
+.album-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .7s;
+}
+
+.album-photo:hover img {
+    transform: scale(1.04);
+}
+
+/* МУЗЫКА */
+
+.music-button {
+    position: fixed;
+    z-index: 10;
+    right: 20px;
+    bottom: 20px;
+
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.2);
+
+    background: linear-gradient(135deg,#ff7927,#d82c18);
+    color: white;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+/* СНЕЖИНКИ */
+
+.snowflake {
+    position: fixed;
+    top: -20px;
+    color: white;
+    opacity: .7;
+    pointer-events: none;
+    z-index: 5;
+    animation: snowfall linear forwards;
+}
+
+@keyframes snowfall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: .1;
+    }
+}
+
+/* ПОДВАЛ */
+
+.footer {
+    margin-top: 45px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,.35);
+}
+
+max-width: 500px {
+    .container {
+        padding: 25px 15px 45px;
+    }
+
+    .banner {
+        height: 155px;
+    }
+
+    .album-photo {
+        height: 210px;
+    }
+
+    .name {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- БАННЕР -->
+    <div class="banner">
+        <img src="banner.jpg" alt="SpeedMan banner">
+    </div>
+
+    <!-- ПРОФИЛЬ -->
+    <div class="profile">
+
+        <div class="avatar">
+            <img src="avatar.gif" alt="Avatar">
+        </div>
+
+        <div class="name">SpeedMan</div>
+
+        <div class="username">@SpeedMan</div>
+
+    </div>
+
+    <!-- ОПИСАНИЕ -->
+    <div class="description">
+        Я крутой
+    </div>
+
+    <!-- КНОПКИ -->
+    <div class="buttons">
+
+        <a class="button"
+           href="https://t.me/"
+           target="_blank">
+           ЛИЧКА
+        </a>
+
+    </div>
+
+    <!-- АЛЬБОМ -->
+    <div class="album">
+
+        <div class="album-title">
+            МОМЕНТЫ
+        </div>
+
+        <div class="album-photo">
+            <img src="photo.jpg" alt="My photo">
+        </div>
+
+    </div>
+
+    <div class="footer">
+        SPEEDMAN · ALASKA
+    </div>
+
+</div>
+
+<!-- МУЗЫКА -->
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-button" id="musicButton"
+        onclick="toggleMusic()">♫</button>
+
+<!-- СНЕГ -->
+<script>
+
+function createSnowflake() {
+    const snow = document.createElement("div");
+
+    snow.className = "snowflake";
+    snow.innerHTML = "❄";
+
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.fontSize = (Math.random() * 12 + 8) + "px";
+    snow.style.animationDuration = (Math.random() * 6 + 5) + "s";
+    snow.style.opacity = Math.random() * .6 + .2;
+
+    document.body.appendChild(snow);
+
+    setTimeout(() => {
+        snow.remove();
+    }, 12000);
+}
+
+setInterval(createSnowflake, 250);
+
+/* МУЗЫКА */
+
+const music = document.getElementById("music");
+const musicButton = document.getElementById("musicButton");
+
+music.volume = 0.12;
+
+function toggleMusic() {
+
+    if (music.paused) {
+        music.play().then(() => {
+            musicButton.innerHTML = "♫";
+        }).catch(() => {
+            musicButton.innerHTML = "▶";
+        });
+    } else {
+        music.pause();
+        musicButton.innerHTML = "▶";
+    }
+}
+
+</script>
+
+</body>
+</html>
